@@ -1,2 +1,2 @@
 # Welcome to my Github Repository. This README contains information about my uploaded assignments.
-Assingnment 1 has been uploaded, which was updating and commiting files to this github page 10 times.
+Assignment 1 has been uploaded, which was downloading the Data_Course files from Dr. Zahn's page and uploading them to my page. I also commited files to this page 10 times to complete the assignment.
