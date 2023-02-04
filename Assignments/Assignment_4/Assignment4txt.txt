@@ -1,0 +1,21 @@
+My idea for a data analysis project would be to use some data from my research to analyze
+how effective different phages are against different strains of Salmonella. Several relevant
+plot points that I would like to investigate are cell lysis time from initial exposure, burst
+size, and how multiple exposures to the phage at different concentrations might affect
+different aspects of the bacteria's response to phage infection. Cell lysis time is
+generally taken from initial exposure to the first cell lysis and is generally measured in
+minutes, however not all phages work this quickly and could be measure in hours. Burst size
+is the number of infective virion forms of the phage ejected from a lysed cell, and is
+measured in PFU/cell, or Plaque forming units (referring to phages) per cell lysed. I would
+really like to see the interaction between PFU/cell and lysis time, as I would like to
+understand if lysis time has to do with internal pressure from the contructed phages or if
+it has to do with a function of the viral gene creating a protein to rip apart the cell
+membrane. Another factor I am interested in is prior phage exposure. Bactera can evolve
+resistance to antibiotics and I am curious to see how quickly they can adapt to phages, or
+if they even need to be exposed to evolve resistance given HGT. Phage concentration is
+another bit of data I could compare other categories to, to see how infection concentration
+might affect other factors. One thing I would like to learn is how to plot multiple plots
+over each other, or to compare them. Im sure you can see my graph, and I would really like to
+learn how to plot multiple of the same/ similar graphs with the same x's and y's over each
+other. For example, my limited fake data set is only for 1 isolated phage, and I'm curious
+to see if it is possible to overlay the same graphs within R.
