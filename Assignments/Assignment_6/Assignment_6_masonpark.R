@@ -1,10 +1,11 @@
 # Assignment 6
 
 # Library and read, this was given
+
 library(tidyverse)
 library(gganimate)
 df <- read_csv("../../Data/BioLog_Plate_Data.csv")
-
+df
 # Cleaning Data into tidy (long) form
 
 df <- df %>% 
@@ -29,6 +30,8 @@ df %>%
   geom_smooth(se=F)+
   theme_minimal()
 
+
+
 # Generate an animated Plot
 
 p <- df %>% 
@@ -36,6 +39,9 @@ p <- df %>%
   group_by(`Sample ID`,Time,Dilution) %>% 
   summarize(Mean_absorbance=mean(Absorbance,na.rm = T)) %>% 
   ggplot(aes(x=Time,y=Mean_absorbance,color=`Sample ID`))+
-  
+  facet_wrap(~Dilution)+
   geom_line()
-p+facet_wrap(~Dilution)+transition_time(Time)
+
+p+transition_reveal(Time)
+anim_save("./Assignment6AnimGraph")
+
