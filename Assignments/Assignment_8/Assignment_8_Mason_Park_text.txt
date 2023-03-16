@@ -1,0 +1,23 @@
+1. Are any of your predicted response values from your best model scientifically meaningless? Explain.
+Yes, effect of nitrogen (both species) appeared to have no effect on the growth rate of the organism. For P.cornucopiae the intercept was
+affected by only -0.3437, with P.ostreotus growth intercept being affected by 0.3716. Other factors affected our intercept by up to 526.86,
+showing that relative to other factors, nitrogen seems to have little to no affect on the growth rate.
+2. In your plots, did you find any non-linear relationships? Do a bit of research online and give a link to at least one resource explaining how to deal with modeling non-linear relationships in R.
+While looking into the effect light has on growth it was hard to not see an exponential growth pattern in P.cornucopiae. It also seemed
+to scale with humiditiy, so I'm curious to see how to graph multiple relationships like this at the same time over model predictions.
+Resource: http://sthda.com/english/articles/40-regression-analysis/162-nonlinear-regression-essentials-in-r-polynomial-and-spline-regression-models/
+3. Write the code you would use to model the data found in “/Data/non_linear_relationship.csv” with a linear model (there are a few ways of doing this)
+
+# writing the code for /Data/non_linear_relationship.csv
+
+df2 <- read.csv("../../Data/non_linear_relationship.csv")
+
+mod5 <- glm(data = df2,
+    formula = response ~ predictor,
+    family = Gamma(link=log))
+
+summary(mod5)
+    
+# I have spent the last 3 hours trying to figure out how to graph this against the real data and I can't. The residuals look really good but
+# when I plot it it does really weird garbage. I'm too tired for this I'll ask in class
+  
