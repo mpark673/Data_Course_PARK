@@ -78,20 +78,14 @@ predtest %>%
 
 # writing the code for /Data/non_linear_relationship.csv
 
-df2 <- read.csv("../../Data/non_linear_relationship.csv") %>% 
-  filter(!predictor == 0)
+df2 <- read.csv("../../Data/non_linear_relationship.csv")
 
 mod5 <- glm(data = df2,
     formula = response ~ predictor,
     family = Gamma(link=log))
+
 summary(mod5)
     
-summary(mod5,dispersion=1)
-
-df3 <- add_predictions(df2,mod5)
-
-df3 %>% 
-  gather_predictions(mod5) %>% 
-  ggplot(aes(x=predictor, y=response))+
-  geom_point()+
-  geom_point(aes(y=pred,color=model))
+# I have spent the last 3 hours trying to figure out how to graph this against the real data and I can't. The residuals look really good but
+# when I plot it it does really weird garbage. I'm too tired for this I'll ask in class
+  
