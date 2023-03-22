@@ -1,0 +1,109 @@
+---
+title: "Assignment 9"
+author: "Mason"
+date: "2023-03-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE,warning = FALSE)
+```
+
+## Assignment 9 R Markdown
+
+This is the Markdown page for Assignment 9. We are looking at grad school admissions data and making some predictions. Before starting, gotta load packages and load in the data.
+
+```{r}
+library(tidyverse)
+library(modelr)
+library(easystats)
+
+df <- read_csv("../../Data/GradSchool_Admissions.csv")
+```
+
+## Creating Models
+
+To start off, the response variable needs to be converted into binomial form.
+
+```{r}
+df <- df %>% 
+  mutate(admit = case_when(admit == 1 ~ TRUE,
+                              TRUE ~ FALSE))
+```
+
+This allows us to create a logistic regression. Now to create models and see how they compare with each other.
+
+```{r}
+mod1 <- glm(data = df,
+            formula = admit ~ gpa + gre + rank,
+            family = "binomial")
+
+mod2 <- glm(data = df,
+            formula = admit ~ gpa * gre * rank,
+            family = "binomial")
+
+mod3 <- glm(data = df,
+            formula = admit ~ (gpa + gre) * rank,
+            family = "binomial")
+
+mod4 <- glm(data = df,
+            formula = admit ~ (gpa * gre) + rank,
+            family = "binomial")
+
+compare_performance(mod1,mod2,mod3,mod4)
+
+compare_performance(mod1,mod2,mod3,mod4) %>% plot
+```
+
+This doesn't show much of a difference between the models, but some look a little better than others. None of these models have a particularly impressive RMSE, with the highest being 0.442. *mod2* has a higher R2 with better weights, so I'm faced with a choice between *mod2* and *mod3*. Lets use the "check_model" function to try to see the differences.
+
+```{r}
+check_model(mod2)
+check_model(mod3)
+```
+
+*mod3* looks a bit better in my opinion. RMSE is a bit higher and has lower colinearity. Lets add our predictions, remembering to include "type='response'" as this is a linear regression.
+
+```{r}
+pred <- add_predictions(df,mod3, type="response")
+```
+
+Now we can plot our predictions!
+
+```{r}
+pred %>% 
+  ggplot(aes(x=gpa,y=pred, color = as.factor(rank))) +
+  geom_smooth()+
+  theme_minimal()
+
+pred %>% 
+  ggplot(aes(x=gre,y=pred, color = as.factor(rank))) +
+  geom_smooth()+
+  theme_minimal()
+```
+
+Cool, what about predicting with a new data set? I wonder how I would stack up for acceptance? I haven't taken a GRE so I put a random, lower than mean score. I also don't know what rank UVU is, but I think I remember from class that is was either 3 or 4, so lets see both.
+
+```{r}
+mason <- data.frame(gre = 500,gpa = 3.55,rank = 3)
+
+add_predictions(mason,mod3,type="response")
+
+mason2 <- data.frame(gre = 500,gpa = 3.55,rank = 4)
+
+add_predictions(mason2,mod3,type="response")
+```
+
+Ouch. I know this is just a model and all models are wrong but ouch. ~ 13% to ~ 22%, depending on what rank UVU is. I wonder how having a slightly better than average GRE would affect my predicted acceptance rate?
+
+```{r}
+mason3 <- data.frame(gre = 600,gpa = 3.55,rank = 3)
+
+add_predictions(mason3,mod3,type="response")
+
+mason4 <- data.frame(gre = 600,gpa = 3.55,rank = 4)
+
+add_predictions(mason4,mod3,type="response")
+```
+
+This is so cool, I'll ask in class but I'm curious if there is a data set like this but with medical schools and MCAT scores? Making a bunch of models and testing how well I'll have to do on the MCAT to get a certain acceptance rate would be so cool!

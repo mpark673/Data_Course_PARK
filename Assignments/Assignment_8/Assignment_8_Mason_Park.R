@@ -88,4 +88,3 @@ summary(mod5)
 performance(mod5)    
 # I have spent the last 3 hours trying to figure out how to graph this against the real data and I can't. The residuals look 
 # really good and the R^2 looks good but when I plot it it does really weird garbage. I'm too tired for this I'll ask in class
-  
