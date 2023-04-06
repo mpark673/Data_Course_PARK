@@ -1,0 +1,12 @@
+DocsumUids: "4758278", "13198058", "4756738", "7460528", "5604708", "7460288", "8236078", "5465908", "6111358", "10224558", "13905278", "10224598", "13541408", "15650478", "4793348", "7460248", "6949148", "7460508", "4859568", "9276298", "5460658", "5460678"
+ReleaseType: RefSeq
+FileType: GENOME_FASTA
+Flat: true
+
+Search results count: 22
+Filtered out 8 entries that do not have the requested ReleaseType, or are suppressed.
+Entries to download: 14
+
+GENOME_FASTA files in archive: 14
+Total size (bytes): 506871
+Total time: 42.5 milliseconds

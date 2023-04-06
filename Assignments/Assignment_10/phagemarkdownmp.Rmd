@@ -1,0 +1,44 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message=FALSE,error=FALSE,warning=FALSE)
+```
+
+# Phage Genome Report
+
+Mason Park
+
+
+
+```{r}
+library(tidyverse)
+library(easystats)
+library(plotly)
+library(kableExtra)
+library(ShortRead)
+```
+
+
+### Data Collection
+
+We collected 101 phage genome assemblies from NCBI with the following filters activated: Viruses, Latest, Complete genome, Exclude anomalous, Exclude partial, RefSeq has annotation. A list of all genome ID's with accession numbers can be found below.
+```{r}
+path <- list.files(path = "../../Data/Phagefasta/genome_assemblies_fasta",
+                   recursive = TRUE,
+                   pattern = ".gz",
+                     full.names = TRUE,
+                   ignore.case = TRUE)
+
+rfa <- readFasta(path)
+
+ShortRead::id(rfa) %>% 
+  kable() %>% 
+  kable_classic(lightable_options = 'hover') %>% 
+  scroll_box(height = "200px")
+
+```
+
+
+
