@@ -4,15 +4,14 @@ library(tidyverse)
 library(janitor)
 library(skimr)
 library(easystats)
-# I. Read the cleaned_covid_data.csv file into an R data frame. (20 pts)
 
+# I. Read the cleaned_covid_data.csv file into an R data frame. (20 pts)
 
 df <- read.csv("./cleaned_covid_data.csv")
 
 # II. Subset the data set to just show states that begin with “A” and save this as an object called A_states. (20 pts)
 
 df1<- grepl("A",df$Province_State)
-df[df1,]
 A_states <- df[df1,]
 
 # III. Create a plot of that subset showing Deaths over time, with a separate facet for each state. (20 pts)
@@ -37,15 +36,13 @@ state_max_fatality_rate <- df %>%
 state_max_fatality_rate <- state_max_fatality_rate %>% 
   arrange(desc(Maximum_Fatality_Ratio))
 
-state_max_fatality_rate$Province_State
-
 # V. Use that new data frame from task IV to create another plot. (20 pts)
 
 state_max_fatality_rate$Province_State <- as.factor(state_max_fatality_rate$Province_State)
 
 state_max_fatality_rate$Province_State <- factor(state_max_fatality_rate$Province_State,
                                                  levels = state_max_fatality_rate$Province_State %>% 
-                                                   unique()
+                                                   unique())
 
 state_max_fatality_rate %>% 
   ggplot(aes(x = Province_State, y = Maximum_Fatality_Ratio)) +
