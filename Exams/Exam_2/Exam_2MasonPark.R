@@ -28,7 +28,8 @@ clean$year <- as.numeric(clean$year)
 clean %>% 
   ggplot(aes(x=year,y=u5mr,group=country_name)) +
   facet_wrap(~continent)+
-  geom_line()
+  geom_line() +
+  theme_minimal()
 # 4. Save plot
 ggsave("PARK_Plot_1.png")
 
@@ -39,10 +40,11 @@ clean %>%
   group_by(continent,year) %>%
   summarise_at(vars(u5mr), list(mean_u5mr = mean)) %>% 
   ggplot(aes(x=year,y=mean_u5mr,color=continent,group=continent))+
-  geom_path(size=3)+
+  geom_path(linewidth=3)+
   labs(x="Year",
        y="Mean_U5MR",
-       color="Continent")
+       color="Continent") + 
+  theme_minimal()
 # 6. Save plot
 
 ggsave("PARK_Plot_2.png")
